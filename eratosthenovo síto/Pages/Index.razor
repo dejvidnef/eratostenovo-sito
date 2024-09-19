@@ -1,0 +1,40 @@
+﻿@page "/"
+
+<h1>Eratosthenovo síto</h1>
+<input title="Insert number" @bind-value=size/>
+<button @onclick=send>OK</button>
+<a>@primeNumbers</a>
+@code {
+    int size;
+    string primeNumbers = "";
+
+    public void send()
+    {
+        primeNumbers = "";
+        bool[] numbers = new bool[size + 1];
+        for (int i = 2; i <= size; i++)
+        {
+            numbers[i] = true;            
+
+        }
+        for (int i = 2; i*i <= size; i++)
+        {
+            if (numbers[i])
+            {
+                for (int j = i * i; j <= size; j += i)
+                {
+                    numbers[j] = false;
+                }
+            }
+        }
+        for (int i = 2; i <= size; i++)
+        {
+            if (numbers[i])
+            {
+                primeNumbers += " " + i;
+            }
+        }
+
+
+    }
+}
